@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-
+    private LoginFragment mLoginFragment;
     Button Radnici;
     Button Gradilista;
 
@@ -17,9 +17,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_f);
 
         //addListenerOnButton();
+        loadFragment();
+    }
+    private void loadFragment(){
+
+        if (mLoginFragment == null) {
+
+            mLoginFragment = new LoginFragment();
+        }
+        getFragmentManager().beginTransaction().replace(R.id.fragmentFrame,mLoginFragment,LoginFragment.TAG).commit();
     }
 
 
