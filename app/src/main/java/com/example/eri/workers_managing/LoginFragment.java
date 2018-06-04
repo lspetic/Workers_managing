@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,11 +136,11 @@ public class LoginFragment extends Fragment {
         editor.putString(Constants.TOKEN,response.getToken());
         editor.putString(Constants.EMAIL,response.getMessage());
         editor.apply();
-
+        Log.d("+++",response.getToken());
         mEtEmail.setText(null);
         mEtPassword.setText(null);
 
-        Intent intent = new Intent(getActivity(), DisplayWorkersActivity.class);
+        Intent intent = new Intent(getActivity(), RadniciGradilsta.class);
         startActivity(intent);
 
     }
@@ -160,10 +161,13 @@ public class LoginFragment extends Fragment {
 
             } catch (IOException e) {
                 e.printStackTrace();
+
             }
         } else {
 
             showSnackBarMessage("Network Error !");
+            Log.d("+++",error.toString());
+
         }
     }
 
