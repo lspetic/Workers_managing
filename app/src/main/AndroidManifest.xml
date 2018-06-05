@@ -29,6 +29,10 @@
 
 
         </activity>
+        <activity android:name=".User_details"
+            android:parentActivityName=".DisplayWorkersActivity">
+        </activity>
+
         <activity
             android:name=".DisplayGradilistaActivity"
             android:parentActivityName=".RadniciGradilsta">

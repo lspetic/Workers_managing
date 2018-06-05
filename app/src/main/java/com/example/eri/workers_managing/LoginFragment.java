@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.eri.workers_managing.model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.example.eri.workers_managing.model.Response;
@@ -48,6 +49,8 @@ public class LoginFragment extends Fragment {
 
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
+
+    private String email;
 
 
 
@@ -86,7 +89,7 @@ public class LoginFragment extends Fragment {
 
         setError();
 
-        String email = mEtEmail.getText().toString();
+         email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
 
         int err = 0;
@@ -135,6 +138,8 @@ public class LoginFragment extends Fragment {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(Constants.TOKEN,response.getToken());
         editor.putString(Constants.EMAIL,response.getMessage());
+        editor.putString(Constants.ID,email);
+
         editor.apply();
         Log.d("+++",response.getToken());
         mEtEmail.setText(null);

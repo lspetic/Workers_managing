@@ -1,7 +1,9 @@
 package com.example.eri.workers_managing.model;
 
 
-public class User {
+import java.io.Serializable;
+
+public class User  implements  Serializable {
 
     private String name;
     private String email;
@@ -10,6 +12,9 @@ public class User {
     private String newPassword;
     private String token;
     private String proffesion;
+    private String premission;
+
+
 
     public void setName(String name) {
         this.name = name;
@@ -49,5 +54,12 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setPremission(String premission){
+        this.premission=premission;
+    }
+    public String getPassword(){
+        return premission;
     }
 }
