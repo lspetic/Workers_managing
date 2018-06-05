@@ -59,7 +59,7 @@ public class User  implements  Serializable {
     public void setPremission(String premission){
         this.premission=premission;
     }
-    public String getPassword(){
+    public String getPremission(){
         return premission;
     }
 }

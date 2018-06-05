@@ -7,4 +7,15 @@
         app:showAsAction="never"
         android:title="@string/logout"
         />
+    <item android:id="@+id/sort_time"
+        android:titleCondensed="Options"
+        android:title="Sortiraj po vremenu "
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:checkable="true"/>
+
+    <item android:id="@+id/sort_av"
+        android:titleCondensed="Persist"
+        android:title="Prikaži dostupne"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:checkable="true" />
 </menu>

@@ -169,9 +169,16 @@ private void initPref(){
     }
     public boolean onOptionsItemSelected(MenuItem item){
         popup=findViewById(R.id.action_search);
+        MenuItem ch1=findViewById(R.id.sort_time);
         switch (item.getItemId()) {
             case R.id.action_search:
                 showPopup(popup);
+            case R.id.sort_time:
+                if(ch1.isChecked()){
+                    ch1.setCheckable(false);
+                }else
+                    ch1.setCheckable(true);
+
 
             default:
                 return super.onOptionsItemSelected(item);

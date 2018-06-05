@@ -83,7 +83,7 @@ public class RegisterFragment extends Fragment {
         String name = mEtName.getText().toString();
         String email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
-        String proffesion=mEtStruka.getText().toString();
+        String proffesion = mEtStruka.getText().toString();
         Log.d("+++reg_db+++",proffesion);
 
         int err = 0;
@@ -118,6 +118,7 @@ public class RegisterFragment extends Fragment {
             user.setEmail(email);
             user.setPassword(password);
             user.setProffesion(proffesion);
+            Log.d("++++",user.getName());
 
             mProgressbar.setVisibility(View.VISIBLE);
             registerProcess(user);
@@ -181,11 +182,11 @@ public class RegisterFragment extends Fragment {
     }
 
     private void goToLogin(){
-/*
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         LoginFragment fragment = new LoginFragment();
         ft.replace(R.id.fragmentFrame, fragment, LoginFragment.TAG);
-        ft.commit();*/
+        ft.commit();
     }
 
     @Override
