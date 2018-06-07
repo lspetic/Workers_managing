@@ -13,7 +13,9 @@ public class User  implements  Serializable {
     private String token;
     private String proffesion;
     private String premission;
-    private String start_job,end_job;
+    private String start_job;
+    private String end_job;
+    private String gradiliste;
 
 
 
@@ -77,6 +79,12 @@ public class User  implements  Serializable {
 
     public String getEnd_job(){return this.end_job;}
 
+    public void  setGradiliste(String gradiliste){
+         this.gradiliste=gradiliste;
+    }
+    public String getGradiliste(){
+        return this.gradiliste;
+    }
 
 
 

@@ -10,11 +10,6 @@
         app:showAsAction="ifRoom"
         android:title="@string/logout"/>
 
-    <item
-        android:id="@+id/menu_action"
-        android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        app:showAsAction="never"
-        android:title="@string/logout"
-        />
+
 
 </menu>

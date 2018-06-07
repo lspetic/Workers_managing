@@ -39,7 +39,7 @@ import rx.subscriptions.CompositeSubscription;
 public class User_details extends AppCompatActivity {
 
     private User user;
-    private EditText etDate,etTime,etDateFinish,etTimefinish;
+    private EditText etDate,etTime,etDateFinish,etTimefinish,etGradiliste;
     private Calendar dateCalendar;
     private Button bSave,bCancel,btnPlus;
     private SimpleDateFormat dateFormatter,timeFormatter;
@@ -56,6 +56,7 @@ protected void onCreate(Bundle savedInstanceState){
     timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
     mSubscriptions = new CompositeSubscription();
 
+
     try {
 
         if (extras != null) {
@@ -70,6 +71,7 @@ protected void onCreate(Bundle savedInstanceState){
     etTime=findViewById(R.id.etTime);
     etDateFinish=findViewById(R.id.etDateFinish);
     etTimefinish=findViewById(R.id.etTimeFinish);
+    etGradiliste = findViewById(R.id.etGradiliste);
 
     bSave=findViewById(R.id.btnSave);
     bCancel=findViewById(R.id.btnCancel);
@@ -77,7 +79,12 @@ protected void onCreate(Bundle savedInstanceState){
     mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     mToken = mSharedPref.getString(Constants.TOKEN,"");
 
+    if(user.getGradiliste()!=null){
+        etDate.setText(user.getStart_job());
+        etDateFinish.setText(user.getEnd_job());
 
+
+    }
 
 
 
@@ -187,6 +194,7 @@ protected void onCreate(Bundle savedInstanceState){
         public void onClick(View v) {
             user.setStart_job(etDate.getText().toString());
             user.setEnd_job(etDateFinish.getText().toString());
+            user.setGradiliste(etGradiliste.getText().toString());
             Log.d("+++put",user.getEnd_job());
             Log.d("+++put",user.getStart_job());
             try {
@@ -201,8 +209,18 @@ protected void onCreate(Bundle savedInstanceState){
         @Override
         public void onClick(View v) {
 
+            if(user!=null){
+                Log.d("++++",user.getName());
+            }
+            try{
+                Log.d("++++",user.getStart_job());
+
+            }catch (Exception e){
+                Log.d("+++",e.toString());
+            }
         }
     });
+
 }
         public void sendData(){
 

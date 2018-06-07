@@ -19,6 +19,9 @@ public class ProfileAdapter extends ArrayAdapter<User> {
     private TextView mTvEmail;
     private TextView mTvDate;
     private TextView mTvProf;
+    private TextView mTvTimeS;
+    private TextView mTvTimeE;
+    private TextView mTvGradiliste;
     ProfileAdapter(Context context, ArrayList<User> user){
 
         super(context, R.layout.list_item_layout, user);
@@ -36,6 +39,10 @@ public class ProfileAdapter extends ArrayAdapter<User> {
         mTvEmail =  convertView.findViewById(R.id.tv_email);
         mTvDate = convertView.findViewById(R.id.tv_date);
         mTvProf =  convertView.findViewById(R.id.tv_prof);
+        mTvTimeS =  convertView.findViewById(R.id.tv_vremena1);
+        mTvTimeE =  convertView.findViewById(R.id.tv_vremena2);
+        mTvGradiliste = convertView.findViewById(R.id.tv_grad);
+
 
         if (user!=null){
 
@@ -43,6 +50,9 @@ public class ProfileAdapter extends ArrayAdapter<User> {
             mTvEmail.setText(user.getEmail());
             mTvDate.setText(user.getCreated_at());
             mTvProf.setText(user.getProfession());
+            mTvTimeS.setText(user.getStart_job());
+            mTvTimeE.setText(user.getEnd_job());
+            mTvTimeE.setText(user.getGradiliste());
         }
 
 

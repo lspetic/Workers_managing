@@ -4,17 +4,18 @@
     <item
         android:id="@+id/ch_sort_time"
         android:checkable="true"
-        android:checked="false"
+
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Sortiraj po vremenu "
-        android:titleCondensed="Options" />
+         />
 
     <item
         android:id="@+id/ch_sort_av"
         android:checkable="true"
+
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Prikaži dostupne"
-        android:titleCondensed="Persist" />
+        />
     <item
         android:id="@+id/action_logout"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"

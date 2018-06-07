@@ -43,8 +43,31 @@
             android:layout_centerHorizontal="true"
             />
 
+    <TextView
+        android:id="@+id/tv_vremena1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginEnd="32dp" />
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tv_vremena2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tv_vremena1"
+        android:layout_below="@+id/tv_email" />
+
+    <TextView
+        android:id="@+id/tv_grad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_prof"
+        android:layout_marginBottom="@dimen/card_items_margin"
+        android:layout_toStartOf="@+id/tv_vremena1" />
+
+
+</RelativeLayout>
 
 
 

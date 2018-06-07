@@ -41,8 +41,9 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     CompositeSubscription subscription;
     ArrayList<User> test;
     User user;
-    View popup;
+    View popup_menu;
     MenuItem sort_time,sort_av;
+    PopupMenu popup;
     private SharedPreferences mSharedPreferences;
     private String prefId;
     private RadniciGradilsta radnici;
@@ -54,13 +55,15 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
         setContentView(R.layout.workers_list);
         users_list = findViewById(R.id.listView);
-        popup=findViewById(R.id.action_search);
+
 
 
         subscription=new CompositeSubscription();
 
         sort_time=findViewById(R.id.ch_sort_time);
         sort_av=findViewById(R.id.ch_sort_av);
+
+
 
 
 
@@ -112,6 +115,9 @@ public class DisplayWorkersActivity extends AppCompatActivity {
                         intent.putExtra("User_data", studentToUpdate);
                         startActivity(intent);
                     }else{
+
+
+
                         Intent intent = new Intent(
                                 DisplayWorkersActivity.this,
                                 User_spec.class);
@@ -199,13 +205,12 @@ private void initPref(){
         // All other menu item clicks are handled by onOptionsItemSelected()
     }
     public boolean onOptionsItemSelected(MenuItem item){
-        popup=findViewById(R.id.action_search);
+        popup_menu=findViewById(R.id.action_search);
 
         switch (item.getItemId()) {
             case R.id.action_search:
-                showPopup(popup);
-
-
+                showPopup(popup_menu);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -213,9 +218,12 @@ private void initPref(){
     }
 
     public void showPopup(View v) {
-        PopupMenu popup = new PopupMenu(this, v);
+
+        popup = new PopupMenu(DisplayWorkersActivity.this, popup_menu);
 
         MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_pupup, popup.getMenu());
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -225,30 +233,31 @@ private void initPref(){
 
                         intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent_logout);
+                        return true;
 
-                    case R.id.ch_sort_time:
-                        Log.d("huso",item.toString());
+                   case R.id.ch_sort_time:
                         if(item.isChecked()){
                             item.setChecked(false);
+
                         }else{
+                            Log.d("+++","sss");
                             item.setChecked(true);
+
                         }
+
                         return true;
                     case R.id.ch_sort_av:
-                        if(item.isChecked()){
-                            item.setChecked(false);
-                        }else{
-                            item.setChecked(true);
-                        }
+                        item.setChecked(!item.isChecked());
 
                         return true;
 
                     default:
                         return false;
                 }
+
             }
         });
-        inflater.inflate(R.menu.menu_pupup, popup.getMenu());
+
 
         popup.show();
     }
