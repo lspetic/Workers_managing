@@ -3,7 +3,7 @@ package com.example.eri.workers_managing;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +42,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     ArrayList<User> test;
     User user;
     View popup;
+    MenuItem sort_time,sort_av;
     private SharedPreferences mSharedPreferences;
     private String prefId;
     private RadniciGradilsta radnici;
@@ -58,12 +59,11 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
         subscription=new CompositeSubscription();
 
-        // Get the Intent that started this activity and extract the string
+        sort_time=findViewById(R.id.ch_sort_time);
+        sort_av=findViewById(R.id.ch_sort_av);
 
 
-        // Capture the layout's TextView and set the string as its text
-       // textView = (TextView) findViewById(R.id.textView);
-       // textView.setText(workers);
+
         user=new User();
         User test2=new User();
         User test3=new User();
@@ -88,8 +88,9 @@ public class DisplayWorkersActivity extends AppCompatActivity {
         Log.d("+++",test.get(0).getName());
 
         load();
-
         Observable<ArrayList> test;
+
+
 
         initPref();
         intent_logout = new Intent(this, MainActivity.class);
@@ -104,12 +105,19 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
                 // Slanje odabranog Student objekta u novu aktivnost (za azuriranje podataka):
                 if (studentToUpdate != null) {
-                    Intent intent = new Intent(
-                            DisplayWorkersActivity.this,
-                            User_details.class);
+                    if(prefId.equals("ivo@admin.com")) {
+                        Intent intent = new Intent(
+                                DisplayWorkersActivity.this,
+                                User_details.class);
                         intent.putExtra("User_data", studentToUpdate);
-                    startActivity(intent);
-
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(
+                                DisplayWorkersActivity.this,
+                                User_spec.class);
+                        intent.putExtra("User_data", studentToUpdate);
+                        startActivity(intent);
+                    }
 
                 }
             }catch(Exception e){
@@ -125,9 +133,8 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
 private void initPref(){
     mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-    prefId=mSharedPreferences.getString(Constants.ID,"");
+    prefId=mSharedPreferences.getString(Constants.EMAIL,"");
 
-    Log.d("++++",prefId);
 }
     private  void load(){
         subscription.add(NetworkUtil.getRetrofit().getProfile()
@@ -151,6 +158,30 @@ private void initPref(){
     }
     private void handleErr(Throwable error){
         Log.d("***","NetworkError"); //stavit toast poslje
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            showSnackBarMessage("Network Error !");
+        }
+    }
+
+
+    private void showSnackBarMessage(String message) {
+
+        Snackbar.make(findViewById(R.id.workers_list),message,Snackbar.LENGTH_SHORT).show();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -169,15 +200,11 @@ private void initPref(){
     }
     public boolean onOptionsItemSelected(MenuItem item){
         popup=findViewById(R.id.action_search);
-        MenuItem ch1=findViewById(R.id.sort_time);
+
         switch (item.getItemId()) {
             case R.id.action_search:
                 showPopup(popup);
-            case R.id.sort_time:
-                if(ch1.isChecked()){
-                    ch1.setCheckable(false);
-                }else
-                    ch1.setCheckable(true);
+
 
 
             default:
@@ -192,11 +219,27 @@ private void initPref(){
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+
                 switch (item.getItemId()) {
                     case R.id.action_logout:
+
                         intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent_logout);
 
+                    case R.id.ch_sort_time:
+                        Log.d("huso",item.toString());
+                        if(item.isChecked()){
+                            item.setChecked(false);
+                        }else{
+                            item.setChecked(true);
+                        }
+                        return true;
+                    case R.id.ch_sort_av:
+                        if(item.isChecked()){
+                            item.setChecked(false);
+                        }else{
+                            item.setChecked(true);
+                        }
 
                         return true;
 

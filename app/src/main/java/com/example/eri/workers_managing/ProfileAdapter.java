@@ -42,7 +42,7 @@ public class ProfileAdapter extends ArrayAdapter<User> {
             mTvName.setText(user.getName());
             mTvEmail.setText(user.getEmail());
             mTvDate.setText(user.getCreated_at());
-            mTvProf.setText(user.getProffesion());
+            mTvProf.setText(user.getProfession());
         }
 
 

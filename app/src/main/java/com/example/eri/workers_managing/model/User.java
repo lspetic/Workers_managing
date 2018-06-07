@@ -13,6 +13,7 @@ public class User  implements  Serializable {
     private String token;
     private String proffesion;
     private String premission;
+    private String start_job,end_job;
 
 
 
@@ -32,7 +33,7 @@ public class User  implements  Serializable {
         this.proffesion=proffesion;
     }
 
-    public String getProffesion(){
+    public String getProfession(){
         return proffesion;
     }
 
@@ -59,7 +60,25 @@ public class User  implements  Serializable {
     public void setPremission(String premission){
         this.premission=premission;
     }
+
     public String getPremission(){
         return premission;
     }
+
+    public void setStart_job(String start_job){
+        this.start_job=start_job;
+    }
+
+    public String getStart_job(){return this.start_job;}
+
+    public void setEnd_job(String end_job){
+        this.end_job=end_job;
+    }
+
+    public String getEnd_job(){return this.end_job;}
+
+
+
+
+
 }

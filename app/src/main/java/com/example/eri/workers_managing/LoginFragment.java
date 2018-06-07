@@ -140,8 +140,9 @@ public class LoginFragment extends Fragment {
         editor.putString(Constants.EMAIL,response.getMessage());
         editor.putString(Constants.ID,email);
 
+
         editor.apply();
-        Log.d("+++",response.getToken());
+
         mEtEmail.setText(null);
         mEtPassword.setText(null);
 

@@ -1,59 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/user_details">
 
     <EditText
         android:id="@+id/etDate"
-        android:layout_width="161dp"
+        android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="112dp"
-        android:text="TextView"
+        android:layout_marginTop="232dp"
+        android:hint="Datum"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etTime"
-        android:layout_width="161dp"
-        android:layout_height="39dp"
+        android:layout_width="151dp"
+        android:layout_height="41dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Vrijeme"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDate" />
+
+    <EditText
+        android:id="@+id/etTimeFinish"
+        android:layout_width="134dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="296dp"
+        android:ems="10"
+        android:hint="Vrijeme"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/etTime"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etDateFinish"
         android:layout_width="134dp"
         android:layout_height="41dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="232dp"
         android:ems="10"
+        android:hint="Datum"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/etTime"
+        app:layout_constraintStart_toEndOf="@+id/etDate"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="116dp"
+        android:layout_height="37dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTime" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="109dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="88dp"
+        android:text="Reset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etDateFinish" />
+
+    <Button
+        android:id="@+id/btnDodajGrad"
+        android:layout_width="110dp"
+        android:layout_height="39dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        android:layout_marginTop="176dp"
+        android:text="Dodaj"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etTimeFinish"
-        android:layout_width="131dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="112dp"
+        android:id="@+id/etGradiliste"
+        android:layout_width="154dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="176dp"
         android:ems="10"
+        android:hint="Gradilište"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/etDate"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

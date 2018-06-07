@@ -27,6 +27,9 @@ public interface RetrofitInterface {
     @PUT("users/{email}")
     Observable<Response> changePassword(@Path("email") String email, @Body User user);
 
+    @PUT("users/{email}/job")
+    Observable<Response> putJob(@Path("email") String email,@Body User user);
+
     @POST("users/{email}/password")
     Observable<Response> resetPasswordInit(@Path("email") String email);
 

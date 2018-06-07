@@ -74,4 +74,5 @@ public class NetworkUtil {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(RetrofitInterface.class);
     }
+
 }
