@@ -29,16 +29,31 @@
 
         <Button
             android:id="@+id/radnici"
-            android:layout_width="105dp"
-            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
             android:onClick="openRadnici"
             android:text="Radnici"
             tools:onClick="openRadnici" />
 
         <Button
-            android:id="@+id/gradilišta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/gradilista"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+
+            android:layout_width="270dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
             android:onClick="openGradilista"
             android:text="Gradilišta"
             tools:onClick="openGradilista" />

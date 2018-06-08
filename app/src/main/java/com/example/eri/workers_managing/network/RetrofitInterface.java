@@ -24,6 +24,12 @@ public interface RetrofitInterface {
     @GET("/api/v1/{available}")
     Observable<ArrayList<User>> getProfile(@Path ("available") Boolean available);
 
+    @GET("/api/v1/list/{available}/{sort}")
+    Observable<ArrayList<User>> getAllWorkers(@Path("available") Boolean available,@Path ("sort") String sort);   ///radi
+
+    @POST("api/v1/users/all")
+    Observable<ArrayList<User>> getListdata(@Body User user);
+
     @GET("/api/v1/list/{sort_by}")
     Observable<ArrayList<User>> getListSort(@Path ("sort_by") String sort_by);
 

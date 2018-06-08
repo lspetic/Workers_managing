@@ -3,4 +3,6 @@
     <string name="logout">Logout</string>
     <string name="dostupni">Prikaži dostupne</string>
     <string name="sort">Sort po završetku</string>
+    <string name="nedostupni">Prikaži nedostupne</string>
+    <string name="svi">Prikaži sve</string>
 </resources>

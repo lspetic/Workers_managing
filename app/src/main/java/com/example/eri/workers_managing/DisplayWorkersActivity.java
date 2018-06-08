@@ -45,6 +45,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     MenuItem sort_time,sort_av;
     PopupMenu popup;
     Boolean available=true;
+    String sort_by="name"; //default sortiraj po imenu za sad
     private SharedPreferences mSharedPreferences;
     private String prefId;
     private RadniciGradilsta radnici;
@@ -62,7 +63,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
         subscription=new CompositeSubscription();
 
         sort_time=findViewById(R.id.ch_sort_time);
-        sort_av=findViewById(R.id.ch_sort_av);
+
         //available =true;
 
 
@@ -94,7 +95,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
 
         load();
-        Observable<ArrayList> test;
+
 
 
 
@@ -148,17 +149,17 @@ private void initPref(){
     private  void load(){
 
 
-        subscription.add(NetworkUtil.getRetrofit().getProfile(available)
+        subscription.add(NetworkUtil.getRetrofit().getListSort("name")   //prikaz svih iz baze
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
     }
 
 
-    private  void load2(){
+    private  void load2(){   //prikaz dostupnih / nedostupnih radnika sortiranih po imenu
 
 
-        subscription.add(NetworkUtil.getRetrofit().getListSort("created_at")
+        subscription.add(NetworkUtil.getRetrofit().getAllWorkers(available,"name")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
@@ -178,7 +179,7 @@ private void initPref(){
         }
     }
     private void handleErr(Throwable error){
-        Log.d("***","NetworkError"); //stavit toast poslje
+
         if (error instanceof HttpException) {
 
             Gson gson = new GsonBuilder().create();
@@ -252,26 +253,23 @@ private void initPref(){
                         return true;
 
                    case R.id.ch_sort_time:
-                       load2();
-                       /* if(item.isChecked()){
-                            item.setChecked(false);
-
-                        }else{
-                            Log.d("+++","sss");
-                            item.setChecked(true);
-
-                        }*/
+                    //   load2();
+                   //čeka implementaciju :)
 
                         return true;
-                    case R.id.ch_sort_av:
-                        //item.setChecked(!item.isChecked());
-                        if(available){
-                            available=false;
-                        }else
-                            available=true;
-                        Log.d("++av",available.toString());
-                        load();     //osvježavanje liste
+
+                    case R.id.ch_view_all:
+
                         return true;
+                    case R.id.ch_view_av:
+                        available=false;
+                        load2();
+                            return true;
+                    case R.id.ch_view_un:
+                        available=false;
+                        load2();
+                        return true;
+
 
                     default:
                         return false;
