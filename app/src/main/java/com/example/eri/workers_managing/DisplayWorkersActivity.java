@@ -44,6 +44,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     View popup_menu;
     MenuItem sort_time,sort_av;
     PopupMenu popup;
+    Boolean available=true;
     private SharedPreferences mSharedPreferences;
     private String prefId;
     private RadniciGradilsta radnici;
@@ -62,6 +63,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
         sort_time=findViewById(R.id.ch_sort_time);
         sort_av=findViewById(R.id.ch_sort_av);
+        //available =true;
 
 
 
@@ -90,6 +92,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
         test.add(test3);
         Log.d("+++",test.get(0).getName());
 
+
         load();
         Observable<ArrayList> test;
 
@@ -108,7 +111,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
                 // Slanje odabranog Student objekta u novu aktivnost (za azuriranje podataka):
                 if (studentToUpdate != null) {
-                    if(prefId.equals("ivo@admin.com")) {
+                    if(prefId.equals("a@a.com")) {
                         Intent intent = new Intent(
                                 DisplayWorkersActivity.this,
                                 User_details.class);
@@ -143,7 +146,19 @@ private void initPref(){
 
 }
     private  void load(){
-        subscription.add(NetworkUtil.getRetrofit().getProfile()
+
+
+        subscription.add(NetworkUtil.getRetrofit().getProfile(available)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handle,this::handleErr));
+    }
+
+
+    private  void load2(){
+
+
+        subscription.add(NetworkUtil.getRetrofit().getListSort("created_at")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
@@ -224,6 +239,7 @@ private void initPref(){
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.menu_pupup, popup.getMenu());
 
+
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -236,19 +252,25 @@ private void initPref(){
                         return true;
 
                    case R.id.ch_sort_time:
-                        if(item.isChecked()){
+                       load2();
+                       /* if(item.isChecked()){
                             item.setChecked(false);
 
                         }else{
                             Log.d("+++","sss");
                             item.setChecked(true);
 
-                        }
+                        }*/
 
                         return true;
                     case R.id.ch_sort_av:
-                        item.setChecked(!item.isChecked());
-
+                        //item.setChecked(!item.isChecked());
+                        if(available){
+                            available=false;
+                        }else
+                            available=true;
+                        Log.d("++av",available.toString());
+                        load();     //osvježavanje liste
                         return true;
 
                     default:
@@ -262,6 +284,8 @@ private void initPref(){
         popup.show();
     }
 
+    public void mySortList(){
 
+    }
 
 }

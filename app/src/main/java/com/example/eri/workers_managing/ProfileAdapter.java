@@ -52,7 +52,7 @@ public class ProfileAdapter extends ArrayAdapter<User> {
             mTvProf.setText(user.getProfession());
             mTvTimeS.setText(user.getStart_job());
             mTvTimeE.setText(user.getEnd_job());
-            mTvTimeE.setText(user.getGradiliste());
+            mTvGradiliste.setText(user.getGradiliste());
         }
 
 

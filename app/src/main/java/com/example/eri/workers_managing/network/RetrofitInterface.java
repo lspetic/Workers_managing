@@ -21,8 +21,11 @@ public interface RetrofitInterface {
     @POST("authenticate")
     Observable<Response> login();
 
-    @GET("/api/v1")
-    Observable<ArrayList<User>> getProfile();
+    @GET("/api/v1/{available}")
+    Observable<ArrayList<User>> getProfile(@Path ("available") Boolean available);
+
+    @GET("/api/v1/list/{sort_by}")
+    Observable<ArrayList<User>> getListSort(@Path ("sort_by") String sort_by);
 
     @PUT("users/{email}")
     Observable<Response> changePassword(@Path("email") String email, @Body User user);

@@ -51,21 +51,14 @@ public class User_details extends AppCompatActivity {
 protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.user_details);
-    Bundle extras = getIntent().getExtras();
+
     dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
     mSubscriptions = new CompositeSubscription();
 
 
-    try {
 
-        if (extras != null) {
-            user = (User)extras.getSerializable("User_data");
-             Log.d("++++", user.getEmail());
-        }
-    }catch(Exception e){
-        Log.d("++error++",e.toString());
-    }
+
 
     etDate=findViewById(R.id.etDate);
     etTime=findViewById(R.id.etTime);
@@ -79,13 +72,9 @@ protected void onCreate(Bundle savedInstanceState){
     mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     mToken = mSharedPref.getString(Constants.TOKEN,"");
 
-    if(user.getGradiliste()!=null){
-        etDate.setText(user.getStart_job());
-        etDateFinish.setText(user.getEnd_job());
+    getMyIntent(); // dohvaćanje user klase iz prethodnog activity-a
 
-
-    }
-
+    getDefaults();  //postavljanje formi na početne vrijednosti korisnika ako takve postoje
 
 
     etDate.setOnClickListener(new View.OnClickListener() {
@@ -209,15 +198,7 @@ protected void onCreate(Bundle savedInstanceState){
         @Override
         public void onClick(View v) {
 
-            if(user!=null){
-                Log.d("++++",user.getName());
-            }
-            try{
-                Log.d("++++",user.getStart_job());
-
-            }catch (Exception e){
-                Log.d("+++",e.toString());
-            }
+            getDefaults();
         }
     });
 
@@ -264,9 +245,46 @@ protected void onCreate(Bundle savedInstanceState){
 
 
     }
+    private void getDefaults(){
+    Log.d("++++",user.getName());
+    try {
+        if(user.getGradiliste()!=null){
+
+            etGradiliste.setText(user.getGradiliste());
+            Log.d("+++",user.getGradiliste());
+
+        }
+        if (user.getStart_job()!=null)
+            etDate.setText(user.getStart_job());
+            Log.d("+++",user.getStart_job());
+
+        if (user.getEnd_job()!=null){
+            etDateFinish.setText(user.getEnd_job());
+            Log.d("+++",user.getStart_job());
+        }
+
+    }catch (Exception e){
+        Log.d("6++++",e.toString());
+    }
+
+    }
 
 
+private void getMyIntent(){
 
+    try {
+
+        Bundle extras = getIntent().getExtras();
+
+        if (extras != null) {
+            user = (User)extras.getSerializable("User_data");
+            Log.d("++++", user.getEmail());
+        }
+
+    }catch(Exception e){
+        Log.d("++error++",e.toString());
+    }
+}
 
 
 
