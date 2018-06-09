@@ -246,7 +246,7 @@ protected void onCreate(Bundle savedInstanceState){
 
     }
     private void getDefaults(){
-    Log.d("++++",user.getName());
+
     try {
         if(user.getGradiliste()!=null){
 

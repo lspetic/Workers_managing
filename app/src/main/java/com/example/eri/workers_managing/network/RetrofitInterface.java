@@ -1,6 +1,7 @@
 package com.example.eri.workers_managing.network;
 
 
+import com.example.eri.workers_managing.model.Gradiliste;
 import com.example.eri.workers_managing.model.User;
 import com.example.eri.workers_managing.model.Response;
 
@@ -11,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface RetrofitInterface {
@@ -25,7 +27,7 @@ public interface RetrofitInterface {
     Observable<ArrayList<User>> getProfile(@Path ("available") Boolean available);
 
     @GET("/api/v1/list/{available}/{sort}")
-    Observable<ArrayList<User>> getAllWorkers(@Path("available") Boolean available,@Path ("sort") String sort);   ///radi
+    Observable<ArrayList<User>> getAllWorkers(@Path("available") Boolean available,@Path ("sort") String sort);
 
     @POST("api/v1/users/all")
     Observable<ArrayList<User>> getListdata(@Body User user);
@@ -44,4 +46,13 @@ public interface RetrofitInterface {
 
     @POST("users/{email}/password")
     Observable<Response> resetPasswordFinish(@Path("email") String email, @Body User user);
+
+    @GET("site")
+    Observable<ArrayList<Gradiliste>>getSite();
+
+
+
+   // @GET("/maps/api/place/autocomplete/json")
+   // Call<PlacesResults> getCityResults(@Query("types") String types, @Query("input") String input, @Query("location") String location, @Query("radius") Integer radius, @Query("key") String key);
+
 }

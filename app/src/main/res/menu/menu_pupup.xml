@@ -4,19 +4,17 @@
 
     <item
         android:id="@+id/ch_sort_time"
-        android:checkable="true"
+        android:checkable="false"
 
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/sort"
-         />
+        android:title="@string/sort" />
 
     <item
         android:id="@+id/ch_view_all"
-        android:checkable="true"
+        android:checkable="false"
 
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/svi"
-        />
+        android:title="@string/svi" />
     <item
         android:id="@+id/ch_view_av"
 
@@ -27,16 +25,17 @@
 
     <item
         android:id="@+id/ch_view_un"
-        android:checkable="true"
+        android:checkable="false"
 
+        android:enabled="true"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/nedostupni"
-        />
+        android:title="@string/nedostupni" />
 
     <item
         android:id="@+id/action_logout"
         android:checkable="false"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
         android:title="@string/logout" />
+
 
 </menu>

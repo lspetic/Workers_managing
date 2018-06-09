@@ -60,6 +60,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login,container,false);
         mSubscriptions = new CompositeSubscription();
         initViews(view);
+        mTiEmail.setError(null);
+        mTiPassword.setError(null);
         initSharedPreferences();
         return view;
     }
@@ -143,8 +145,7 @@ public class LoginFragment extends Fragment {
 
         editor.apply();
 
-        mEtEmail.setText(null);
-        mEtPassword.setText(null);
+
 
         Intent intent = new Intent(getActivity(), RadniciGradilsta.class);
         startActivity(intent);

@@ -51,6 +51,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     private RadniciGradilsta radnici;
     private Intent intent_logout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,49 +59,16 @@ public class DisplayWorkersActivity extends AppCompatActivity {
         setContentView(R.layout.workers_list);
         users_list = findViewById(R.id.listView);
 
-
-
         subscription=new CompositeSubscription();
 
         sort_time=findViewById(R.id.ch_sort_time);
 
-        //available =true;
-
-
-
-
-
-        user=new User();
-        User test2=new User();
-        User test3=new User();
-
-        user.setName("Pero");
-        user.setEmail("lino@lino.com");
-
-        user.setProffesion("Stolar");
-
-        test2.setName("Mirko");
-        test2.setEmail("mirko@mirko.com");
-        test2.setProffesion("ubojica");
-
-        test3.setName("Mirko");
-        test3.setEmail("mirko@mpazi.com");
-        test3.setProffesion("pekar");
-
-        test =new ArrayList<User>();
-        test.add(user);
-        test.add(test2);
-        test.add(test3);
-        Log.d("+++",test.get(0).getName());
-
-
-        load();
-
-
+            load();
 
 
         initPref();
         intent_logout = new Intent(this, MainActivity.class);
+
         users_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -140,7 +108,6 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
 
 
-
 private void initPref(){
     mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
     prefId=mSharedPreferences.getString(Constants.EMAIL,"");
@@ -156,22 +123,18 @@ private void initPref(){
     }
 
 
-    private  void load2(){   //prikaz dostupnih / nedostupnih radnika sortiranih po imenu
+    private  void load2(){                                           //prikaz dostupnih / nedostupnih radnika
 
 
-        subscription.add(NetworkUtil.getRetrofit().getAllWorkers(available,"name")
+        subscription.add(NetworkUtil.getRetrofit().getProfile(available)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
     }
 
 
-    private void handleR(User user){
-        Log.d("++++",user.getName());
-        test.add(user);
-        handle(test);
-    }
-    private void handle(ArrayList<User> user){
+
+    private void handle(ArrayList<User> user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
         if (user != null && user.size()!=0){
             ProfileAdapter adapter = new ProfileAdapter(this, user);
             users_list.setAdapter(adapter);
@@ -215,11 +178,6 @@ private void initPref(){
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void onGroupItemClick(MenuItem item) {
-        // One of the group items (using the onClick attribute) was clicked
-        // The item parameter passed here indicates which item it is
-        // All other menu item clicks are handled by onOptionsItemSelected()
-    }
     public boolean onOptionsItemSelected(MenuItem item){
         popup_menu=findViewById(R.id.action_search);
 
@@ -260,13 +218,17 @@ private void initPref(){
 
                     case R.id.ch_view_all:
 
+                        load();
+
                         return true;
                     case R.id.ch_view_av:
                         available=false;
+
                         load2();
                             return true;
                     case R.id.ch_view_un:
-                        available=false;
+                        available=true;
+
                         load2();
                         return true;
 
@@ -282,8 +244,5 @@ private void initPref(){
         popup.show();
     }
 
-    public void mySortList(){
-
-    }
 
 }
