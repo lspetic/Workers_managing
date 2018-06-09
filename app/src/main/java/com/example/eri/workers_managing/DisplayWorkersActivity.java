@@ -75,16 +75,16 @@ public class DisplayWorkersActivity extends AppCompatActivity {
                 // Dohvat odabrane stvake (objekt Student):
                 try {
 
-                User studentToUpdate = (User) users_list.getItemAtPosition(position);
+                User userToUpdate = (User) users_list.getItemAtPosition(position);
 
 
                 // Slanje odabranog Student objekta u novu aktivnost (za azuriranje podataka):
-                if (studentToUpdate != null) {
+                if (userToUpdate != null) {
                     if(prefId.equals("a@a.com")) {
                         Intent intent = new Intent(
                                 DisplayWorkersActivity.this,
                                 User_details.class);
-                        intent.putExtra("User_data", studentToUpdate);
+                        intent.putExtra("User_data", userToUpdate);
                         startActivity(intent);
                     }else{
 
@@ -93,7 +93,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
                         Intent intent = new Intent(
                                 DisplayWorkersActivity.this,
                                 User_spec.class);
-                        intent.putExtra("User_data", studentToUpdate);
+                        intent.putExtra("User_data", userToUpdate);
                         startActivity(intent);
                     }
 

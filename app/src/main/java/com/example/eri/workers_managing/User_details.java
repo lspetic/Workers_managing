@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.eri.workers_managing.model.Gradiliste;
 import com.example.eri.workers_managing.model.Response;
 import com.example.eri.workers_managing.model.User;
 import com.example.eri.workers_managing.network.NetworkUtil;
@@ -46,6 +48,7 @@ public class User_details extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private String mToken;
     private SharedPreferences mSharedPref;
+    private TextView tvUser;
 
 @Override
 protected void onCreate(Bundle savedInstanceState){
@@ -56,19 +59,16 @@ protected void onCreate(Bundle savedInstanceState){
     timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
     mSubscriptions = new CompositeSubscription();
 
-
-
-
-
     etDate=findViewById(R.id.etDate);
     etTime=findViewById(R.id.etTime);
     etDateFinish=findViewById(R.id.etDateFinish);
     etTimefinish=findViewById(R.id.etTimeFinish);
     etGradiliste = findViewById(R.id.etGradiliste);
+    tvUser=findViewById(R.id.et_user);
 
     bSave=findViewById(R.id.btnSave);
     bCancel=findViewById(R.id.btnCancel);
-   // btnPlus=findViewById(R.id.button_add);
+    btnPlus=findViewById(R.id.btnDodajGrad);
     mSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
     mToken = mSharedPref.getString(Constants.TOKEN,"");
 
@@ -76,7 +76,16 @@ protected void onCreate(Bundle savedInstanceState){
 
     getDefaults();  //postavljanje formi na početne vrijednosti korisnika ako takve postoje
 
+    tvUser.setText(user.getEmail()); //prikaz podataka o korisniku
 
+    btnPlus.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent=new Intent(User_details.this,ListaGradilista.class);
+            startActivityForResult(intent,1);
+        }
+    });
+    //Click listeneri za datume i vrijeme
     etDate.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -187,7 +196,8 @@ protected void onCreate(Bundle savedInstanceState){
             Log.d("+++put",user.getEnd_job());
             Log.d("+++put",user.getStart_job());
             try {
-                sendData();
+                sendData(); //slanje podataka u bazu
+
             }catch(Exception e){
                 Log.d("+++ee",e.toString());
             }
@@ -214,7 +224,7 @@ protected void onCreate(Bundle savedInstanceState){
 
         }
     private void handleResponse(Response response){
-        showSnackBarMessage(response.getMessage());
+    showSnackBarMessage(response.getMessage());
 }
 
     private void handleError(Throwable error){
@@ -277,6 +287,7 @@ private void getMyIntent(){
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
+          //  etGradiliste.setText((String)extras.getSerializable("odabrano_gradliste"));
             user = (User)extras.getSerializable("User_data");
             Log.d("++++", user.getEmail());
         }
@@ -285,7 +296,19 @@ private void getMyIntent(){
         Log.d("++error++",e.toString());
     }
 }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+try {
 
+    String strEditText = (String) data.getExtras().getSerializable("odabrano_gradiliste");
+    etGradiliste.setText(strEditText);
+
+}catch (Exception e){
+    Log.d("+++", e.toString());
+}
+
+
+    }
 
 
 

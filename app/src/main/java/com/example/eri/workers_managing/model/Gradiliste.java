@@ -1,6 +1,8 @@
 package com.example.eri.workers_managing.model;
 
-public class Gradiliste {
+import java.io.Serializable;
+
+public class Gradiliste implements Serializable{
     private String name;
     private String address;
     private String latlong;

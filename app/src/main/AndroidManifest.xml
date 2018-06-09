@@ -12,7 +12,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDubDumr1CUy-TXsi5bwYgYsIVo3vyiG8Y" />
+            android:value="API_KEY" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,13 +22,22 @@
         </activity>
 
         <activity
-            android:name=".DisplayWorkersActivity"
-            android:parentActivityName=".RadniciGradilsta">
+        android:name=".DisplayWorkersActivity"
+        android:parentActivityName=".RadniciGradilsta">
+
+        <!-- The meta-data tag is required if you support API level 15 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+    </activity>
+        <activity
+            android:name=".ListaGradilista"
+            android:parentActivityName=".User_details">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".User_details" />
         </activity>
         <activity android:name=".RadniciGradilsta">
 

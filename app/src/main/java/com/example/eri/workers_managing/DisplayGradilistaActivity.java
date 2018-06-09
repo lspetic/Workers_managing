@@ -45,7 +45,7 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
 
         addGradiliste.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Log.d("+++10","pls add gradiliste ");
+
             }
         });
 
@@ -59,8 +59,6 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
         LatLng rijeka = new LatLng(45, 14);
       //  mMap.addMarker(new MarkerOptions().position(rijeka).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(rijeka));
-
-
 
         // Setting a custom info window adapter for the google map
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
@@ -91,12 +89,6 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
                    double latitude = Double.parseDouble(latlong[0]);
                    double longitude = Double.parseDouble(latlong[1]);
                    LatLng lo=new LatLng(latitude,longitude);
-
-
-
-
-
-
             }
         });
 
@@ -107,8 +99,6 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
                     Log.d("+++","aladin");
 
                 }
-
-
 
                 return true;
             }
@@ -140,15 +130,10 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
             m=mMap.addMarker(new MarkerOptions().position(lo).title(object.getName()));
             m.setTag(object);
         }
-
-
-
-
     }
     private  void handleErr(Throwable error){
 
     }
-
 
 }
 
