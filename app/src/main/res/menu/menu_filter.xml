@@ -6,13 +6,19 @@
 
 
     <item
-        android:id="@+id/action_search"
+        android:id="@+id/action_menu"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="ifRoom"
         android:title="@string/logout"
-        >
+        app:showAsAction="always">
 
     </item>
+    <item
+        android:id="@+id/action"
+        app:actionLayout="@layout/activity_display_workers"
+        android:icon="@drawable/ic_person"
+        android:orderInCategory="1"
+        android:title="action"
+        app:showAsAction="ifRoom|collapseActionView"/>
 
 
 

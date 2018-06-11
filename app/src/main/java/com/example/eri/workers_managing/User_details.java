@@ -50,6 +50,7 @@ public class User_details extends AppCompatActivity {
     private SharedPreferences mSharedPref;
     private TextView tvUser;
 
+
 @Override
 protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ protected void onCreate(Bundle savedInstanceState){
     etTimefinish=findViewById(R.id.etTimeFinish);
     etGradiliste = findViewById(R.id.etGradiliste);
     tvUser=findViewById(R.id.et_user);
+
 
     bSave=findViewById(R.id.btnSave);
     bCancel=findViewById(R.id.btnCancel);

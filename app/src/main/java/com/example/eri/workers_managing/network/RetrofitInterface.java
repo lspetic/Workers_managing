@@ -50,6 +50,8 @@ public interface RetrofitInterface {
     @GET("site")
     Observable<ArrayList<Gradiliste>>getSite();
 
+    @GET("/api/v1/users/{query}")
+    Observable<ArrayList<User>> getSearch(@Path ("query") String query);
 
 
    // @GET("/maps/api/place/autocomplete/json")

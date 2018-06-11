@@ -6,12 +6,15 @@ import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -27,7 +30,6 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -49,7 +51,9 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
     private String prefId;
     private RadniciGradilsta radnici;
+    private EditText etSearch;
     private Intent intent_logout;
+    private String query;
 
 
     @Override
@@ -62,12 +66,33 @@ public class DisplayWorkersActivity extends AppCompatActivity {
         subscription=new CompositeSubscription();
 
         sort_time=findViewById(R.id.ch_sort_time);
+        etSearch=findViewById(R.id.etsearch);
 
-            load();
-
-
+        load();
         initPref();
         intent_logout = new Intent(this, MainActivity.class);
+
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d("+++s+s+",etSearch.getText().toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (etSearch.getText().toString().equals("")) {
+
+                }else{
+                    load3();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
         users_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -116,7 +141,7 @@ private void initPref(){
     private  void load(){
 
 
-        subscription.add(NetworkUtil.getRetrofit().getListSort("name")   //prikaz svih iz baze
+        subscription.add(NetworkUtil.getRetrofit().getListSort("end_job")   //prikaz svih iz baze
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
@@ -127,6 +152,15 @@ private void initPref(){
 
 
         subscription.add(NetworkUtil.getRetrofit().getProfile(available)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handle,this::handleErr));
+    }
+
+    private  void load3(){                                           //prikaz dostupnih / nedostupnih radnika
+
+
+        subscription.add(NetworkUtil.getRetrofit().getSearch(etSearch.getText().toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
@@ -179,10 +213,10 @@ private void initPref(){
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        popup_menu=findViewById(R.id.action_search);
+        popup_menu=findViewById(R.id.action_menu);
 
         switch (item.getItemId()) {
-            case R.id.action_search:
+            case R.id.action_menu:
                 showPopup(popup_menu);
                 return true;
 
