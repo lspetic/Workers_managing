@@ -166,11 +166,12 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
         switch (item.getItemId()) {
             case R.id.action_menu:
                 logout();
-
+            return true;
             case R.id.MojProfil:
 
                 Intent intent=new Intent(DisplayGradilistaActivity.this,MyProfile.class);
                 startActivity(intent);
+                return true;
             case R.id.Lista_gradilista:
                 Intent intent1=new Intent(DisplayGradilistaActivity.this,ListaGradilista.class);
                 startActivity(intent1);
