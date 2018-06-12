@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.example.eri.workers_managing.model.Gradiliste;
 import com.example.eri.workers_managing.model.Response;
 import com.example.eri.workers_managing.model.User;
 import com.example.eri.workers_managing.network.NetworkUtil;
@@ -54,6 +55,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     private EditText etSearch;
     private Intent intent_logout,intent1;
     private String query_gr;
+    private MenuItem prikazi;
 
 
     @Override
@@ -67,9 +69,10 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
         sort_time=findViewById(R.id.ch_sort_time);
         etSearch=findViewById(R.id.etsearch);
-        Bundle extras = intent1.getExtras();
-        query_gr=extras.getString("search_gr");
-        Log.d("aaaaaaa",extras.getString("search_gr"));
+        prikazi=findViewById(R.id.ch_view_av);
+
+
+
         load();
         initPref();
 
@@ -96,7 +99,13 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
             }
         });
+        try {
+            Gradiliste in=(Gradiliste)getIntent().getSerializableExtra("search_gr");
+            etSearch.setText(in.getName());
 
+        }catch (Exception e){
+                //bla
+        }
         users_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -108,7 +117,7 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
                 // Slanje odabranog Student objekta u novu aktivnost (za azuriranje podataka):
                 if (userToUpdate != null) {
-                    if(prefId.equals("a@a.com")) {
+                    if(prefId.equals("ivan@grbac-team.com")) {
                         Intent intent = new Intent(
                                 DisplayWorkersActivity.this,
                                 User_details.class);
@@ -144,7 +153,7 @@ private void initPref(){
     private  void load(){
 
 
-        subscription.add(NetworkUtil.getRetrofit().getListSort("end_job")   //prikaz svih iz baze
+        subscription.add(NetworkUtil.getRetrofit().getListSort(sort_by)   //prikaz svih iz baze
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handle,this::handleErr));
@@ -209,77 +218,74 @@ private void initPref(){
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_filter, menu);
-
+        inflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
+
     public boolean onOptionsItemSelected(MenuItem item){
-        popup_menu=findViewById(R.id.action_menu);
 
         switch (item.getItemId()) {
-            case R.id.action_menu:
-                showPopup(popup_menu);
+
+            case R.id.MojProfil:
+
+                Intent intent_23=new Intent(DisplayWorkersActivity.this,MyProfile.class);
+                startActivity(intent_23);
+                return  true;
+
+            case R.id.action_logout:
+
+                logout();
                 return true;
+
+            case R.id.ch_sort_time:
+                sort_by="end_job";
+                  load();
+                //čeka implementaciju :)
+
+                return true;
+
+            case R.id.ch_view_av:
+
+                item.setChecked(!item.isChecked());
+
+                if(item.isChecked()){
+                    available=false;
+                }else {
+                    available=true;
+                }
+
+                load2();
+                return true;
+
+
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    public void logout() {
 
-    public void showPopup(View v) {
+        try {
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putString(Constants.EMAIL, "");
+            editor.putString(Constants.TOKEN, "");
+            editor.putString(Constants.ID, "");
+            editor.apply();
 
-        popup = new PopupMenu(DisplayWorkersActivity.this, popup_menu);
+        }catch (Exception e){
+            Log.d("+++",e.toString());
+        }
 
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_pupup, popup.getMenu());
+        intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent_logout);
 
-
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.action_logout:
-
-                        intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent_logout);
-                        return true;
-
-                   case R.id.ch_sort_time:
-                    //   load2();
-                   //čeka implementaciju :)
-
-                        return true;
-
-                    case R.id.ch_view_all:
-
-                        load();
-
-                        return true;
-                    case R.id.ch_view_av:
-                        available=false;
-
-                        load2();
-                            return true;
-                    case R.id.ch_view_un:
-                        available=true;
-
-                        load2();
-                        return true;
-
-
-                    default:
-                        return false;
-                }
-
-            }
-        });
-
-
-        popup.show();
     }
+
+
+
+
 
 
 }

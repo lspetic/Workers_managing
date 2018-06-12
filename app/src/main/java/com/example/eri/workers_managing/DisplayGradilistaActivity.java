@@ -96,7 +96,8 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
             @Override
             public void onInfoWindowClick(Marker marker) {
                  Intent intent=new Intent(DisplayGradilistaActivity.this,DisplayWorkersActivity.class);
-                 intent.putExtra("search_gr",marker.getTag().getClass().getName());
+                 Gradiliste gr=(Gradiliste)  marker.getTag();
+                 intent.putExtra("search_gr",gr);
                  startActivity(intent);
                   /*  Log.d("+++",marker.getId());
                     //LatLng latlong=marker.getPosition();

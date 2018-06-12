@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/card_padding"
-        android:background="@color/backgroundItem"
+        android:background="@drawable/border"
     >
 
         <TextView
@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="@android:color/black"
+            android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <TextView
@@ -27,46 +28,13 @@
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-        <TextView
-            android:id="@+id/tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_email"
-            android:layout_marginTop="@dimen/card_items_margin"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:id="@+id/tv_prof"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_date"
-            android:layout_marginTop="@dimen/card_items_margin"
-            android:layout_centerHorizontal="true"
-            />
-
-    <TextView
-        android:id="@+id/tv_vremena1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/tv_name"
-        android:layout_marginEnd="32dp" />
-
-    <TextView
-        android:id="@+id/tv_vremena2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tv_vremena1"
-        android:layout_below="@+id/tv_email" />
-
     <TextView
         android:id="@+id/tv_grad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tv_prof"
         android:layout_marginBottom="@dimen/card_items_margin"
-        android:layout_toStartOf="@+id/tv_vremena1" />
+        android:layout_toStartOf="@+id/tv_email" />
 
 
 </RelativeLayout>

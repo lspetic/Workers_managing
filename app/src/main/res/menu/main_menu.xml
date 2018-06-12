@@ -4,14 +4,31 @@
 
     <item android:id="@+id/MojProfil"
         android:title="Moj profil"
-        app:showAsAction="never"></item>
+        app:showAsAction="never"/>
 
-    <item android:id="@+id/SlobodniRadnici"
-        android:title="Slobodni radnici"
-        app:showAsAction="never"></item>
+    <!--<item android:id="@+id/SlobodniRadnici"-->
+        <!--android:title="Slobodni radnici"-->
+        <!--app:showAsAction="never"></item>-->
 
-    <item android:id="@+id/Logout"
-        android:title="Logout"
-        app:showAsAction="never"></item>
+    <item
+        android:id="@+id/ch_sort_time"
+        android:checkable="false"
+
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/sort" />
+
+    <item
+        android:id="@+id/ch_view_av"
+
+
+        android:checkable="true"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/dostupni" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:checkable="false"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="@string/logout" />
 
 </menu>

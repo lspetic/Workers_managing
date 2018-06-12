@@ -11,13 +11,38 @@ public class User  implements  Serializable {
     private String created_at;
     private String newPassword;
     private String token;
-    private String proffesion;
-    private String premission;
+    private String profession;
+
     private String start_job;
     private String end_job;
     private String gradiliste;
+    private String surname;
+    private String address;
+    private String phone;
 
+    public String getSurname() {
+        return surname;
+    }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -31,12 +56,12 @@ public class User  implements  Serializable {
         this.password = password;
     }
 
-    public void setProffesion(String proffesion){
-        this.proffesion=proffesion;
+    public void setProfession(String profession){
+        this.profession = profession;
     }
 
     public String getProfession(){
-        return proffesion;
+        return profession;
     }
 
     public String getName() {
@@ -57,14 +82,6 @@ public class User  implements  Serializable {
 
     public void setToken(String token) {
         this.token = token;
-    }
-
-    public void setPremission(String premission){
-        this.premission=premission;
-    }
-
-    public String getPremission(){
-        return premission;
     }
 
     public void setStart_job(String start_job){

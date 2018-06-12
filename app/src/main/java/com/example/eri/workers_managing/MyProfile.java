@@ -35,6 +35,9 @@ public class MyProfile extends AppCompatActivity {
     private TextView mTvEmail;
     private TextView mTvDate;
     private TextView mTvProf;
+    private TextView mTvSurname;
+    private TextView mTvAddress;
+    private TextView mTvPhone;
     private TextView mTvTimeS;
     private TextView mTvTimeE;
     private TextView mTvGradiliste;
@@ -45,7 +48,7 @@ public class MyProfile extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myprofile);
+        setContentView(R.layout.myprofile2);
 
         subscription=new CompositeSubscription();
 
@@ -53,6 +56,9 @@ public class MyProfile extends AppCompatActivity {
         mTvEmail =  findViewById(R.id.tv_email);
         mTvDate = findViewById(R.id.tv_date);
         mTvProf =  findViewById(R.id.tv_prof);
+       // mTvSurname =  findViewById(R.id.tv_surname);
+        mTvAddress =  findViewById(R.id.tv_address);
+        mTvPhone =  findViewById(R.id.tv_phone);
         mTvTimeS =  findViewById(R.id.tv_vremena1);
         mTvTimeE =  findViewById(R.id.tv_vremena2);
         mTvGradiliste =findViewById(R.id.tv_grad);
@@ -83,22 +89,46 @@ Log.d("aaaaaa","vbbbbbbbbb");
 
 
     private void handle(User user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
-            Log.d("+++asd",user.getEmail());
 
-        if (user!=null){
-
-            mTvName.setText(user.getName());
-            mTvEmail.setText(user.getEmail());
-            mTvDate.setText("");
-            mTvProf.setText(user.getProfession());
-            mTvTimeS.setText(start);
-            mTvTimeE.setText(end);
-            mTvGradiliste.setText(user.getGradiliste());
-            Log.d("++++u",user.getEmail());
-            Log.d("++++u",user.getName());
-            Log.d("++++u",user.getCreated_at());
-
+        Log.d("u++++u",user.getEmail());
+        Log.d("u++++u",user.getName());
+        String name_surname;
+        if(user.getSurname()!=null){
+            name_surname=user.getName()+user.getSurname();
+        }else{
+            name_surname=user.getName();
         }
+
+
+            String adr;
+            String phone;
+
+            if(user.getAddress()==null){
+                adr="Dodaj adresu";
+
+            }else{
+                adr=user.getAddress();
+            }
+            if(user.getPhone()==null){
+                phone="Dodaj telefon";
+
+            }else{
+                phone=user.getPhone();
+            }
+
+            mTvName.setText(name_surname);
+            mTvEmail.setText(user.getEmail());
+
+            mTvProf.setText(user.getProfession());
+         //   mTvSurname.setText(user.getSurname());
+          mTvAddress.setText(adr);
+            mTvPhone.setText(phone);
+          /*    mTvTimeS.setText(start);
+            mTvTimeE.setText(end);*/
+           // mTvGradiliste.setText(user.getGradiliste());
+
+
+
 
     }
     private void handleErr(Throwable error){
@@ -123,7 +153,7 @@ Log.d("aaaaaa","vbbbbbbbbb");
     }
     private void showSnackBarMessage(String message) {
 
-        Snackbar.make(findViewById(R.id.myprofile),message,Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.myprofile2),message,Snackbar.LENGTH_SHORT).show();
 
     }
 }

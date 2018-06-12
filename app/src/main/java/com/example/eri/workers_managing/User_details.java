@@ -58,8 +58,8 @@ protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.user_details);
 
-    dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-    timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
+    dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+   // timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
     mSubscriptions = new CompositeSubscription();
 
     etDate=findViewById(R.id.etDate);
@@ -126,59 +126,9 @@ try {
         }
     });
 
-    etTime.setOnClickListener(new View.OnClickListener(){
-        final Calendar myCalender = Calendar.getInstance();
-        int hour = myCalender.get(Calendar.HOUR_OF_DAY);
-        int minute = myCalender.get(Calendar.MINUTE);
-        public void onClick(View v) {
 
 
-            TimePickerDialog.OnTimeSetListener myTimeListener = new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    if (view.isShown()) {
-                        myCalender.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        myCalender.set(Calendar.MINUTE, minute);
-                        etTime.setText(timeFormatter.format(myCalender.getTime()));
 
-                    }
-                }
-            };
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(User_details.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, myTimeListener, hour, minute, true);
-            timePickerDialog.setTitle("Choose hour:");
-            timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            timePickerDialog.show();
-        }
-
-    });
-
-    etTimefinish.setOnClickListener(new View.OnClickListener(){
-        final Calendar myCalender = Calendar.getInstance();
-        int hour = myCalender.get(Calendar.HOUR_OF_DAY);
-        int minute = myCalender.get(Calendar.MINUTE);
-        public void onClick(View v) {
-
-
-            TimePickerDialog.OnTimeSetListener myTimeListener = new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    if (view.isShown()) {
-                        myCalender.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        myCalender.set(Calendar.MINUTE, minute);
-                        etTimefinish.setText(timeFormatter.format(myCalender.getTime()));
-
-                    }
-                }
-            };
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(User_details.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, myTimeListener, hour, minute, true);
-            timePickerDialog.setTitle("Choose hour:");
-            timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            timePickerDialog.show();
-        }
-
-    });
 
     etDateFinish.setOnClickListener(new View.OnClickListener(){
         @Override
@@ -229,7 +179,7 @@ try {
             Log.d("+++put",user.getEnd_job());
             Log.d("+++put",user.getStart_job());
             try {
-                Log.d("++++",gradiliste.getBr_radnika().toString());
+             //   Log.d("++++",gradiliste.getBr_radnika().toString());
                 sendData(); //slanje podataka u bazu
 
             }catch(Exception e){
@@ -379,9 +329,6 @@ try {
 
 
     }
-
-
-
 
 }
 

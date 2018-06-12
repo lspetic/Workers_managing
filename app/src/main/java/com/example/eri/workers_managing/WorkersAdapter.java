@@ -59,10 +59,6 @@ public class WorkersAdapter extends ArrayAdapter<User> {
 
             mTvName.setText(user.getName());
             mTvEmail.setText(user.getEmail());
-            mTvDate.setText("");
-            mTvProf.setText(user.getProfession());
-            mTvTimeS.setText(start);
-            mTvTimeE.setText(end);
             mTvGradiliste.setText(user.getGradiliste());
 
         }

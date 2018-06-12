@@ -145,17 +145,8 @@ public class LoginFragment extends Fragment {
 
 
         editor.apply();
-
-
-
-        if (email.equals("admin@admin.com")){
-            Intent intent1 = new Intent(getActivity(), DisplayWorkersActivity.class);
-            startActivity(intent1);
-        }else {
-
-            Intent intent2 = new Intent(getActivity(), RadniciGradilsta.class);
-            startActivity(intent2);
-        }
+        Intent intent2 = new Intent(getActivity(), RadniciGradilsta.class);
+        startActivity(intent2);
 
     }
 

@@ -35,7 +35,7 @@ public class RadniciGradilsta extends AppCompatActivity {
     private Button Gradilista;
     private MenuItem sp;
     private String prefid;
-    CompositeSubscription subscription;
+
 
 
 
@@ -48,8 +48,8 @@ public class RadniciGradilsta extends AppCompatActivity {
         //addListenerOnButton();
        // Gradilista.setOnClickListener(view -> logout());
         initSharedPreferences();
-        subscription=new CompositeSubscription();
-        load();
+
+
     }
 
     public void openRadnici(View view) {
@@ -111,54 +111,5 @@ public class RadniciGradilsta extends AppCompatActivity {
         //startActivity(intent);
     }
 
-    //dohvacanje cijelog usera
-    private  void load(){                                           //prikaz dostupnih / nedostupnih radnika
-
-
-        subscription.add(NetworkUtil.getRetrofit().getProfileMy("a@a.com")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handle,this::handleErr));
-    }
-
-
-
-    private void handle(User user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
-        Log.d("+++asd",user.getEmail());
-
-        if (user!=null){
-
-
-            Log.d("++++u",user.getName());
-            Log.d("++++u",user.getCreated_at());
-
-        }
-
-    }
-    private void handleErr(Throwable error){
-
-        if (error instanceof HttpException) {
-
-            Gson gson = new GsonBuilder().create();
-
-            try {
-
-                String errorBody = ((HttpException) error).response().errorBody().string();
-                Response response = gson.fromJson(errorBody,Response.class);
-                showSnackBarMessage(response.getMessage());
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-
-            showSnackBarMessage("Network Error !");
-        }
-    }
-    private void showSnackBarMessage(String message) {
-
-       // Snackbar.make(findViewById(R.id.myprofile),message,Snackbar.LENGTH_SHORT).show();
-
-    }
 
 }

@@ -40,6 +40,9 @@ public class RegisterFragment extends Fragment {
     private EditText mEtEmail;
     private EditText mEtPassword;
     private EditText mEtStruka;
+    private EditText mEtSurname;
+    private EditText mEtAddress;
+    private EditText mEtPhone;
     private Button   mBtRegister;
     private TextView mTvLogin;
     private TextInputLayout mTiName;
@@ -72,6 +75,9 @@ public class RegisterFragment extends Fragment {
         mTiPassword = (TextInputLayout) v.findViewById(R.id.ti_password);
         mProgressbar = (ProgressBar) v.findViewById(R.id.progress);
         mEtStruka=(EditText) v.findViewById(R.id.et_struka);
+//        mEtSurname=(EditText) v.findViewById(R.id.et_surname);
+//        mEtAddress=(EditText) v.findViewById(R.id.et_address);
+//        mEtPhone=(EditText) v.findViewById(R.id.et_phone);
 
         mBtRegister.setOnClickListener(view -> register());
         mTvLogin.setOnClickListener(view -> goToLogin());
@@ -85,6 +91,9 @@ public class RegisterFragment extends Fragment {
         String email = mEtEmail.getText().toString();
         String password = mEtPassword.getText().toString();
         String proffesion = mEtStruka.getText().toString();
+//        String surname = mEtSurname.getText().toString();
+//        String address = mEtAddress.getText().toString();
+//        String phone = mEtPhone.getText().toString();
         Log.d("+++reg_db+++",proffesion);
 
         int err = 0;
@@ -118,7 +127,10 @@ public class RegisterFragment extends Fragment {
             user.setName(name);
             user.setEmail(email);
             user.setPassword(password);
-            user.setProffesion(proffesion);
+            user.setProfession(proffesion);
+//            user.setSurname(surname);
+//            user.setAddress(address);
+//            user.setPhone(phone);
             Log.d("++++",user.getName());
 
 
