@@ -41,6 +41,9 @@ public interface RetrofitInterface {
     @PUT("users/{email}/job")
     Observable<Response> putJob(@Path("email") String email,@Body User user);
 
+    @PUT("site/{name}")
+    Observable<Response> putSite(@Path("name") String name,@Body Gradiliste gradiliste);
+
     @POST("users/{email}/password")
     Observable<Response> resetPasswordInit(@Path("email") String email);
 
@@ -50,8 +53,14 @@ public interface RetrofitInterface {
     @GET("site")
     Observable<ArrayList<Gradiliste>>getSite();
 
+    @GET("site/one/{name}")
+    Observable<Gradiliste>getSiteOne(@Path("name")  String name);
+
     @GET("/api/v1/users/{query}")
     Observable<ArrayList<User>> getSearch(@Path ("query") String query);
+
+    @GET("/api/v1/users/my/{email}")
+    Observable<User> getProfileMy(@Path ("email") String email);
 
 
    // @GET("/maps/api/place/autocomplete/json")

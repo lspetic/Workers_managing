@@ -36,7 +36,7 @@ public class ListaGradilista extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Gradiliste item=(Gradiliste) site_list.getItemAtPosition(position);
                 Intent intent=new Intent();
-                intent.putExtra("odabrano_gradiliste",item.getName());
+                intent.putExtra("odabrano_gradiliste",item);
                 setResult(RESULT_OK,intent);
                 finish();
 

@@ -33,38 +33,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    public void addListenerOnButton() {
-//
-//        Radnici = (Button) findViewById(R.id.radnici);
-//        Gradilista= (Button) findViewById(R.id.gradilišta);
-//
-//        Radnici.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//
-//                Intent browserIntent =
-//                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.mkyong.com"));
-//                startActivity(browserIntent);
-//
-//            }
-//
-//        });
-//
-//        Gradilista.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//
-//                Intent browserIntent =
-//                        new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-//                startActivity(browserIntent);
-//
-//            }
-//
-//        });
-//
-//    }
 
     public void openRadnici(View view) {
         Intent intent = new Intent(this, DisplayWorkersActivity.class);

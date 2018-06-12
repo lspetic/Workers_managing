@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">Workers_managing</string>
+    <string name="app_name">Grbac Team</string>
     <string name="logout">Logout</string>
     <string name="dostupni">Prikaži dostupne</string>
     <string name="sort">Sort po završetku</string>
     <string name="nedostupni">Prikaži nedostupne</string>
     <string name="svi">Prikaži sve</string>
+    <string name="moj_profil">Moj profil</string>
+    <string name="kontakt_poslodavca">Kontakt poslodavca</string>
+    <string name="company_name">Grbac Team</string>
 </resources>

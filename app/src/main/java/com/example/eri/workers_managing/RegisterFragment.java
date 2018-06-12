@@ -48,6 +48,7 @@ public class RegisterFragment extends Fragment {
     private ProgressBar mProgressbar;
 
     private CompositeSubscription mSubscriptions;
+    public String permission;
 
     @Nullable
     @Override
@@ -119,6 +120,8 @@ public class RegisterFragment extends Fragment {
             user.setPassword(password);
             user.setProffesion(proffesion);
             Log.d("++++",user.getName());
+
+
 
             mProgressbar.setVisibility(View.VISIBLE);
             registerProcess(user);

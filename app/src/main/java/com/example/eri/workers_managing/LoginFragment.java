@@ -51,6 +51,7 @@ public class LoginFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
 
     private String email;
+    User user;
 
 
 
@@ -147,8 +148,14 @@ public class LoginFragment extends Fragment {
 
 
 
-        Intent intent = new Intent(getActivity(), RadniciGradilsta.class);
-        startActivity(intent);
+        if (email.equals("admin@admin.com")){
+            Intent intent1 = new Intent(getActivity(), DisplayWorkersActivity.class);
+            startActivity(intent1);
+        }else {
+
+            Intent intent2 = new Intent(getActivity(), RadniciGradilsta.class);
+            startActivity(intent2);
+        }
 
     }
 

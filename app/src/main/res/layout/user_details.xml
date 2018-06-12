@@ -27,6 +27,7 @@
         android:ems="10"
         android:hint="Vrijeme"
         android:inputType="textPersonName"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDate" />
 
@@ -40,6 +41,7 @@
         android:ems="10"
         android:hint="Vrijeme"
         android:inputType="textPersonName"
+        android:visibility="invisible"
         app:layout_constraintStart_toEndOf="@+id/etTime"
         app:layout_constraintTop_toTopOf="parent" />
 

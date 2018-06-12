@@ -4,10 +4,20 @@
    >
 
 
+    <!--<item-->
+        <!--android:id="@+id/my_profile"-->
+        <!--android:icon="@android:drawable/ic_menu_close_clear_cancel"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="@string/moj_profil"/>-->
+    <!--<item-->
+        <!--android:id="@+id/contact"-->
+        <!--android:icon="@android:drawable/ic_menu_close_clear_cancel"-->
+        <!--app:showAsAction="always"-->
+        <!--android:title="@string/kontakt_poslodavca"/>-->
     <item
         android:id="@+id/action_menu"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="@string/logout"/>
 
 

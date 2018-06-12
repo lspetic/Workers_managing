@@ -52,8 +52,8 @@ public class DisplayWorkersActivity extends AppCompatActivity {
     private String prefId;
     private RadniciGradilsta radnici;
     private EditText etSearch;
-    private Intent intent_logout;
-    private String query;
+    private Intent intent_logout,intent1;
+    private String query_gr;
 
 
     @Override
@@ -67,9 +67,12 @@ public class DisplayWorkersActivity extends AppCompatActivity {
 
         sort_time=findViewById(R.id.ch_sort_time);
         etSearch=findViewById(R.id.etsearch);
-
+        Bundle extras = intent1.getExtras();
+        query_gr=extras.getString("search_gr");
+        Log.d("aaaaaaa",extras.getString("search_gr"));
         load();
         initPref();
+
         intent_logout = new Intent(this, MainActivity.class);
 
 
@@ -170,7 +173,7 @@ private void initPref(){
 
     private void handle(ArrayList<User> user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
         if (user != null && user.size()!=0){
-            ProfileAdapter adapter = new ProfileAdapter(this, user);
+            WorkersAdapter adapter = new WorkersAdapter(this, user);
             users_list.setAdapter(adapter);
 
         }

@@ -1,16 +1,22 @@
 package com.example.eri.workers_managing;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.eri.workers_managing.model.Gradiliste;
 import com.example.eri.workers_managing.model.Response;
 import com.example.eri.workers_managing.network.NetworkUtil;
+import com.example.eri.workers_managing.utils.Constants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,9 +38,11 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
     private Marker mark1;
     private CompositeSubscription subscription;
     private FloatingActionButton addGradiliste;
+    private Intent intent_logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        intent_logout = new Intent(this, MainActivity.class);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_gradilista);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -58,12 +66,17 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
         // Add a marker in Sydney, Australia, and move the camera.
         LatLng rijeka = new LatLng(45, 14);
       //  mMap.addMarker(new MarkerOptions().position(rijeka).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(rijeka));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rijeka,4.0f));
+       // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(rijeka.latitude, rijeka.longitude), 20.0f));
+
+
+
+        load();
 
         // Setting a custom info window adapter for the google map
         MarkerInfoWindowAdapter markerInfoWindowAdapter = new MarkerInfoWindowAdapter(getApplicationContext());
         googleMap.setInfoWindowAdapter(markerInfoWindowAdapter);
-        load();
+
 
         // Adding and showing marker when the map is touched
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -82,13 +95,18 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {           //postavljanje info prozora kod clicka na marker
             @Override
             public void onInfoWindowClick(Marker marker) {
-                    Log.d("+++",marker.getId());
+                 Intent intent=new Intent(DisplayGradilistaActivity.this,DisplayWorkersActivity.class);
+                 intent.putExtra("search_gr",marker.getTag().getClass().getName());
+                 startActivity(intent);
+                  /*  Log.d("+++",marker.getId());
                     //LatLng latlong=marker.getPosition();
 
                     String[] latlong =  "-34.8799074,174.7565664".split(",");
                    double latitude = Double.parseDouble(latlong[0]);
                    double longitude = Double.parseDouble(latlong[1]);
                    LatLng lo=new LatLng(latitude,longitude);
+
+*/
             }
         });
 
@@ -134,7 +152,39 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
     private  void handleErr(Throwable error){
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_grad, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.action_menu:
+                logout();
+
+            case R.id.MojProfil:
+
+                Intent intent=new Intent(DisplayGradilistaActivity.this,MyProfile.class);
+                startActivity(intent);
+            case R.id.Lista_gradilista:
+                Intent intent1=new Intent(DisplayGradilistaActivity.this,ListaGradilista.class);
+                startActivity(intent1);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void logout() {
+
+        intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent_logout);
+    }
 }
 
 

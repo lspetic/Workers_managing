@@ -28,6 +28,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -41,6 +42,7 @@ import rx.subscriptions.CompositeSubscription;
 public class User_details extends AppCompatActivity {
 
     private User user;
+    private Gradiliste gradiliste,gradiliste_old;
     private EditText etDate,etTime,etDateFinish,etTimefinish,etGradiliste;
     private Calendar dateCalendar;
     private Button bSave,bCancel,btnPlus;
@@ -78,7 +80,20 @@ protected void onCreate(Bundle savedInstanceState){
 
     getDefaults();  //postavljanje formi na početne vrijednosti korisnika ako takve postoje
 
+    if (user.getGradiliste()!=null) {
+        loadGradiliste(); //dohvati objekt gradiliste ako je radnik več na nekom gradilistu
+
+    }
+
+try {
     tvUser.setText(user.getEmail()); //prikaz podataka o korisniku
+}catch (Exception   e){
+    Log.d("aaaaaa",e.toString());
+}
+
+
+
+
 
     btnPlus.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -195,9 +210,26 @@ protected void onCreate(Bundle savedInstanceState){
             user.setStart_job(etDate.getText().toString());
             user.setEnd_job(etDateFinish.getText().toString());
             user.setGradiliste(etGradiliste.getText().toString());
+
+
+
+           if (gradiliste_old==null){               //radnik dodan na novo gradiliste
+
+               gradiliste.setBr_radnika(gradiliste.getBr_radnika()+1);
+               sendDataToSite(gradiliste);
+           }else  if(!gradiliste.getName().equals(gradiliste_old.getName())){   //radnik premjesten na drugo gradiliste
+
+                   gradiliste.setBr_radnika(gradiliste.getBr_radnika()+1);
+                   gradiliste_old.setBr_radnika(gradiliste_old.getBr_radnika()+1);
+                   sendDataToSite(gradiliste);
+                   sendDataToSite(gradiliste_old);
+           }                                                                //ako se ime gradilista ne mijenja netreba update-ati bazu
+
+
             Log.d("+++put",user.getEnd_job());
             Log.d("+++put",user.getStart_job());
             try {
+                Log.d("++++",gradiliste.getBr_radnika().toString());
                 sendData(); //slanje podataka u bazu
 
             }catch(Exception e){
@@ -225,9 +257,45 @@ protected void onCreate(Bundle savedInstanceState){
 
 
         }
+
+    public void sendDataToSite(Gradiliste grad){
+
+
+        mSubscriptions.add(NetworkUtil.getRetrofit(mToken).putSite(grad.getName(),grad)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse,this::handleError));
+
+
+    }
+
+    public void loadGradiliste(){
+
+        mSubscriptions.add(NetworkUtil.getRetrofit().getSiteOne(user.getGradiliste())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handle, this::handleErr));
+    }
+
+    private  void handle(Gradiliste gradiliste_old){
+        this.gradiliste_old=gradiliste_old;
+
+
+
+
+
+
+
+    }
+    private void handleErr(Throwable error){
+
+
+    }
+
     private void handleResponse(Response response){
     showSnackBarMessage(response.getMessage());
 }
+
 
     private void handleError(Throwable error){
         if (error instanceof HttpException) {
@@ -302,8 +370,8 @@ private void getMyIntent(){
         super.onActivityResult(requestCode, resultCode, data);
 try {
 
-    String strEditText = (String) data.getExtras().getSerializable("odabrano_gradiliste");
-    etGradiliste.setText(strEditText);
+    gradiliste = (Gradiliste) data.getExtras().getSerializable("odabrano_gradiliste");
+    etGradiliste.setText(gradiliste.getName());
 
 }catch (Exception e){
     Log.d("+++", e.toString());

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -12,7 +13,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.eri.workers_managing.model.Response;
+import com.example.eri.workers_managing.model.User;
+import com.example.eri.workers_managing.network.NetworkUtil;
 import com.example.eri.workers_managing.utils.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+
+import retrofit2.adapter.rxjava.HttpException;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class RadniciGradilsta extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
@@ -22,6 +35,7 @@ public class RadniciGradilsta extends AppCompatActivity {
     private Button Gradilista;
     private MenuItem sp;
     private String prefid;
+    CompositeSubscription subscription;
 
 
 
@@ -29,11 +43,13 @@ public class RadniciGradilsta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_radnicigradiliista);
       //  Gradilista=findViewById(R.id.gradilišta);
         //addListenerOnButton();
        // Gradilista.setOnClickListener(view -> logout());
         initSharedPreferences();
+        subscription=new CompositeSubscription();
+        load();
     }
 
     public void openRadnici(View view) {
@@ -52,25 +68,27 @@ public class RadniciGradilsta extends AppCompatActivity {
         mToken = mSharedPreferences.getString(Constants.TOKEN,"");
         mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
         prefid = mSharedPreferences.getString(Constants.ID,"");
-        Log.d("++++",prefid);
+        Log.d("++++",mEmail);
     }
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void onGroupItemClick(MenuItem item) {
-        // One of the group items (using the onClick attribute) was clicked
-        // The item parameter passed here indicates which item it is
-        // All other menu item clicks are handled by onOptionsItemSelected()
-    }
+
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
             case R.id.action_menu:
               logout();
+
+            case R.id.MojProfil:
+
+                Intent intent=new Intent(RadniciGradilsta.this,MyProfile.class);
+                startActivity(intent);
+
 
             default:
              return super.onOptionsItemSelected(item);
@@ -91,6 +109,56 @@ public class RadniciGradilsta extends AppCompatActivity {
          finish();
         //Intent intent = new Intent(this, MainActivity.class);
         //startActivity(intent);
+    }
+
+    //dohvacanje cijelog usera
+    private  void load(){                                           //prikaz dostupnih / nedostupnih radnika
+
+
+        subscription.add(NetworkUtil.getRetrofit().getProfileMy("a@a.com")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handle,this::handleErr));
+    }
+
+
+
+    private void handle(User user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
+        Log.d("+++asd",user.getEmail());
+
+        if (user!=null){
+
+
+            Log.d("++++u",user.getName());
+            Log.d("++++u",user.getCreated_at());
+
+        }
+
+    }
+    private void handleErr(Throwable error){
+
+        if (error instanceof HttpException) {
+
+            Gson gson = new GsonBuilder().create();
+
+            try {
+
+                String errorBody = ((HttpException) error).response().errorBody().string();
+                Response response = gson.fromJson(errorBody,Response.class);
+                showSnackBarMessage(response.getMessage());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+
+            showSnackBarMessage("Network Error !");
+        }
+    }
+    private void showSnackBarMessage(String message) {
+
+       // Snackbar.make(findViewById(R.id.myprofile),message,Snackbar.LENGTH_SHORT).show();
+
     }
 
 }

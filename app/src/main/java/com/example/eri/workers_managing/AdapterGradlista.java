@@ -9,11 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.eri.workers_managing.model.Gradiliste;
-import com.example.eri.workers_managing.model.User;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class AdapterGradlista extends ArrayAdapter<Gradiliste> {
@@ -50,9 +47,6 @@ private Context context;
             mTvLatLong.setText("");
 
         }
-
-
-
         return convertView;
     }
 
