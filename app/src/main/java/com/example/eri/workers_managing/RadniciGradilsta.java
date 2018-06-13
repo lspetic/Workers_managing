@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -35,7 +36,8 @@ public class RadniciGradilsta extends AppCompatActivity {
     private Button Gradilista;
     private MenuItem sp;
     private String prefid;
-    CompositeSubscription subscription;
+    private CompositeSubscription subscription;
+    private Intent intent_logout;
 
 
 
@@ -50,6 +52,8 @@ public class RadniciGradilsta extends AppCompatActivity {
         initSharedPreferences();
         subscription=new CompositeSubscription();
         load();
+
+        intent_logout=new Intent(this,MainActivity.class);
     }
 
     public void openRadnici(View view) {
@@ -81,7 +85,7 @@ public class RadniciGradilsta extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            case R.id.action_menu:
+            case R.id.action_logout:
               logout();
 
             case R.id.MojProfil:
@@ -106,9 +110,9 @@ public class RadniciGradilsta extends AppCompatActivity {
         }catch (Exception e){
             Log.d("+++",e.toString());
         }
-         finish();
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
+
+        intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent_logout);
     }
 
     //dohvacanje cijelog usera

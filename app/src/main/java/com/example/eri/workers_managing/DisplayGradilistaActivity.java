@@ -40,9 +40,10 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
     private FloatingActionButton addGradiliste;
     private Intent intent_logout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        intent_logout = new Intent(this, MainActivity.class);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_gradilista);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -50,6 +51,7 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
         mapFragment.getMapAsync(this);
         subscription=new CompositeSubscription();
         addGradiliste=findViewById(R.id.add_gradiliste);
+        intent_logout=new Intent(this,MainActivity.class);
 
         addGradiliste.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -164,7 +166,7 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()) {
-            case R.id.action_menu:
+            case R.id.action_logout:
                 logout();
             return true;
             case R.id.MojProfil:

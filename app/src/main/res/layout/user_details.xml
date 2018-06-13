@@ -6,43 +6,86 @@
     android:layout_height="match_parent"
     android:id="@+id/user_details">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="39dp"
+            android:layout_height="39dp"
+            android:src="@drawable/account" />
+
+        <TextView
+            android:id="@+id/et_user"
+            android:layout_width="38dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/et_prezime"
+            android:layout_width="38dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="50dp"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tv_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:orientation="horizontal"
+        android:paddingLeft="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/email_outline" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/et_adresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"  />
+    </LinearLayout>
+
     <EditText
         android:id="@+id/etDate"
         android:layout_width="153dp"
         android:layout_height="43dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginTop="308dp"
         android:hint="Datum"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etTime"
-        android:layout_width="151dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Vrijeme"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDate" />
-
-    <EditText
-        android:id="@+id/etTimeFinish"
-        android:layout_width="134dp"
-        android:layout_height="41dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="296dp"
-        android:ems="10"
-        android:hint="Vrijeme"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintStart_toEndOf="@+id/etTime"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -50,8 +93,8 @@
         android:layout_width="134dp"
         android:layout_height="41dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="232dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="308dp"
         android:ems="10"
         android:hint="Datum"
         android:inputType="textPersonName"
@@ -62,20 +105,20 @@
         android:id="@+id/btnSave"
         android:layout_width="116dp"
         android:layout_height="37dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
         android:text="Save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTime" />
+        app:layout_constraintTop_toBottomOf="@+id/etDate" />
 
     <Button
         android:id="@+id/btnCancel"
         android:layout_width="109dp"
         android:layout_height="39dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="68dp"
         android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDateFinish" />
@@ -84,9 +127,9 @@
         android:id="@+id/btnDodajGrad"
         android:layout_width="110dp"
         android:layout_height="39dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="216dp"
         android:text="Dodaj"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -97,21 +140,10 @@
         android:layout_height="42dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="216dp"
         android:ems="10"
         android:hint="Gradilište"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/et_user"
-        android:layout_width="154dp"
-        android:layout_height="27dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

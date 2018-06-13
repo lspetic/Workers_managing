@@ -50,7 +50,7 @@ public class User_details extends AppCompatActivity {
     private CompositeSubscription mSubscriptions;
     private String mToken;
     private SharedPreferences mSharedPref;
-    private TextView tvUser;
+    private TextView tvUser,tvAddress,tvSurname,tvEmail;
 
 
 @Override
@@ -59,15 +59,18 @@ protected void onCreate(Bundle savedInstanceState){
     setContentView(R.layout.user_details);
 
     dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-   // timeFormatter = new SimpleDateFormat("hh-mm", Locale.getDefault());
+
     mSubscriptions = new CompositeSubscription();
 
     etDate=findViewById(R.id.etDate);
-    etTime=findViewById(R.id.etTime);
+
     etDateFinish=findViewById(R.id.etDateFinish);
-    etTimefinish=findViewById(R.id.etTimeFinish);
+
     etGradiliste = findViewById(R.id.etGradiliste);
     tvUser=findViewById(R.id.et_user);
+    tvAddress=findViewById(R.id.et_adresa);
+    tvSurname=findViewById(R.id.et_prezime);
+    tvEmail=findViewById(R.id.tv_email);
 
 
     bSave=findViewById(R.id.btnSave);
@@ -86,7 +89,10 @@ protected void onCreate(Bundle savedInstanceState){
     }
 
 try {
-    tvUser.setText(user.getEmail()); //prikaz podataka o korisniku
+    tvUser.setText(user.getName());             //prikaz podataka o korisniku
+    tvAddress.setText(user.getAddress());
+    tvSurname.setText(user.getSurname());
+    tvEmail.setText(user.getEmail());
 }catch (Exception   e){
     Log.d("aaaaaa",e.toString());
 }
@@ -179,7 +185,7 @@ try {
             Log.d("+++put",user.getEnd_job());
             Log.d("+++put",user.getStart_job());
             try {
-             //   Log.d("++++",gradiliste.getBr_radnika().toString());
+
                 sendData(); //slanje podataka u bazu
 
             }catch(Exception e){

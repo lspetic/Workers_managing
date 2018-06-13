@@ -10,9 +10,6 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     private LoginFragment mLoginFragment;
-    Button Radnici;
-    Button Gradilista;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +29,6 @@ public class MainActivity extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(R.id.fragmentFrame,mLoginFragment,LoginFragment.TAG).commit();
     }
 
-
-
-    public void openRadnici(View view) {
-        Intent intent = new Intent(this, DisplayWorkersActivity.class);
-        startActivity(intent);    }
-
-    public void openGradilista(View view) {
-        Intent intent = new Intent(this, DisplayGradilistaActivity.class);
-        startActivity(intent);    }
 
 }
 
