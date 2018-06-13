@@ -87,7 +87,10 @@ protected void onCreate(Bundle savedInstanceState){
         loadGradiliste(); //dohvati objekt gradiliste ako je radnik več na nekom gradilistu
 
     }
-
+    tvUser.setText(user.getName());             //prikaz podataka o korisniku
+    tvAddress.setText(user.getAddress());
+    tvSurname.setText(user.getSurname());
+    tvEmail.setText(user.getEmail());
 try {
     tvUser.setText(user.getName());             //prikaz podataka o korisniku
     tvAddress.setText(user.getAddress());

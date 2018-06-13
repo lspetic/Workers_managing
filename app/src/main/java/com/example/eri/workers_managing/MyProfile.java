@@ -44,6 +44,7 @@ public class MyProfile extends AppCompatActivity {
     private TextView mTvTimeS;
     private TextView mTvTimeE;
     private TextView mTvGradiliste;
+
     private SimpleDateFormat dateFormatter;
     private EditText etAddress,etPhone;
     private String start;
@@ -68,6 +69,7 @@ public class MyProfile extends AppCompatActivity {
         mTvGradiliste =findViewById(R.id.tv_grad);
         etAddress = findViewById(R.id.et_adresa);
         etPhone = findViewById(R.id.et_phone);
+        mTvSurname=findViewById(R.id.et_surname);
 
         initSharedPreferences();
         load();
@@ -98,13 +100,9 @@ public class MyProfile extends AppCompatActivity {
 
     private void handle(User user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
 
-         String name_surname;
-        if(user.getSurname()!=null){
-            name_surname=user.getName()+ user.getSurname();
-        }else{
-            name_surname=user.getName();
-        }
-        mTvName.setText(name_surname);
+
+        mTvName.setText(user.getName());
+        mTvSurname.setText(user.getSurname());
         mTvEmail.setText(user.getEmail());
 
         mTvProf.setText(user.getProfession());
