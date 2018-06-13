@@ -41,6 +41,12 @@ public interface RetrofitInterface {
     @PUT("users/{email}/job")
     Observable<Response> putJob(@Path("email") String email,@Body User user);
 
+    @PUT("users/setad/{email}")
+    Observable<Response> putProfileAddress(@Path("email") String email,@Body User user);
+
+    @PUT("users/setph/{email}")
+    Observable<Response> putProfilePhone(@Path("email") String email,@Body User user);
+
     @PUT("site/{name}")
     Observable<Response> putSite(@Path("name") String name,@Body Gradiliste gradiliste);
 

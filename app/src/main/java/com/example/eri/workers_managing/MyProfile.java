@@ -7,6 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.eri.workers_managing.model.Response;
@@ -42,6 +45,7 @@ public class MyProfile extends AppCompatActivity {
     private TextView mTvTimeE;
     private TextView mTvGradiliste;
     private SimpleDateFormat dateFormatter;
+    private EditText etAddress,etPhone;
     private String start;
     private String end;
     private User u;
@@ -62,10 +66,14 @@ public class MyProfile extends AppCompatActivity {
         mTvTimeS =  findViewById(R.id.tv_vremena1);
         mTvTimeE =  findViewById(R.id.tv_vremena2);
         mTvGradiliste =findViewById(R.id.tv_grad);
+        etAddress = findViewById(R.id.et_adresa);
+        etPhone = findViewById(R.id.et_phone);
 
         initSharedPreferences();
         load();
-Log.d("aaaaaa","vbbbbbbbbb");
+
+
+
     }
 
     private void initSharedPreferences() {
@@ -90,43 +98,65 @@ Log.d("aaaaaa","vbbbbbbbbb");
 
     private void handle(User user){                      //prihvat odgovora od retrofita,dobijemo listu i postavljamu ju na adapter
 
-        Log.d("u++++u",user.getEmail());
-        Log.d("u++++u",user.getName());
-        String name_surname;
+         String name_surname;
         if(user.getSurname()!=null){
-            name_surname=user.getName()+user.getSurname();
+            name_surname=user.getName()+ user.getSurname();
         }else{
             name_surname=user.getName();
         }
+        mTvName.setText(name_surname);
+        mTvEmail.setText(user.getEmail());
 
+        mTvProf.setText(user.getProfession());
 
-            String adr;
-            String phone;
+           String adr;
+           String phone;
 
             if(user.getAddress()==null){
-                adr="Dodaj adresu";
+
+                etAddress.setVisibility(View.VISIBLE);
+                etAddress.setHint("Dodaj adresu");
+                etAddress.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(event.getKeyCode()==KeyEvent.KEYCODE_ENTER){
+                           String address=etAddress.getText().toString();
+                           user.setAddress(address);
+                           sendDataAd(user);
+                        }
+                        return false;
+                    }
+                });
+
+
 
             }else{
                 adr=user.getAddress();
+                mTvAddress.setVisibility(View.VISIBLE);
+                mTvAddress.setText(adr);
             }
             if(user.getPhone()==null){
-                phone="Dodaj telefon";
+
+                etPhone.setVisibility(View.VISIBLE);
+                etPhone.setHint("Dodaj telefon");
+                etPhone.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if(event.getKeyCode()==KeyEvent.KEYCODE_ENTER){
+                            String phone=etPhone.getText().toString();
+                            user.setPhone(phone);
+                            sendDataPh(user);
+                        }
+                        return false;
+                    }
+                });
 
             }else{
                 phone=user.getPhone();
+                mTvPhone.setVisibility(View.VISIBLE);
+                mTvPhone.setText(phone);
+
             }
-
-            mTvName.setText(name_surname);
-            mTvEmail.setText(user.getEmail());
-
-            mTvProf.setText(user.getProfession());
-         //   mTvSurname.setText(user.getSurname());
-          mTvAddress.setText(adr);
-            mTvPhone.setText(phone);
-          /*    mTvTimeS.setText(start);
-            mTvTimeE.setText(end);*/
-           // mTvGradiliste.setText(user.getGradiliste());
-
 
 
 
@@ -156,4 +186,26 @@ Log.d("aaaaaa","vbbbbbbbbb");
         Snackbar.make(findViewById(R.id.myprofile2),message,Snackbar.LENGTH_SHORT).show();
 
     }
+    private  void sendDataAd(User data){                                           //prikaz dostupnih / nedostupnih radnika
+
+
+        subscription.add(NetworkUtil.getRetrofit().putProfileAddress(mEmail,data)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleRes,this::handleErr));
+    }
+
+    private  void sendDataPh(User data){                                           //prikaz dostupnih / nedostupnih radnika
+
+
+        subscription.add(NetworkUtil.getRetrofit().putProfilePhone(mEmail,data)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleRes,this::handleErr));
+    }
+    private void handleRes(Response response){
+        showSnackBarMessage(response.getMessage());
+    }
+
+
 }
