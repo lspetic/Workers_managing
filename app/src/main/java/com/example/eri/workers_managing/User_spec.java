@@ -41,7 +41,7 @@ public class User_spec extends AppCompatActivity{
 //        mTvTimeE =  findViewById(R.id.tv_vremena2);
 //        mTvGradiliste =findViewById(R.id.tv_grad);
         mTvAddress = findViewById(R.id.tv_address);
-        mTvPhone = findViewById(R.id.et_phone);
+        mTvPhone = findViewById(R.id.tv_phone);
         mTvSurname=findViewById(R.id.et_surname);
 
         mTvPhone.setVisibility(View.VISIBLE);
@@ -49,7 +49,7 @@ public class User_spec extends AppCompatActivity{
 
         mTvName.setText(user.getName());
         mTvEmail.setText(user.getEmail());
-        mTvSurname.setText(user.getSurname());
+     //   mTvSurname.setText(user.getSurname());
         mTvPhone.setText(user.getPhone());
         mTvAddress.setText(user.getAddress());
         mTvProf.setText(user.getProfession());
