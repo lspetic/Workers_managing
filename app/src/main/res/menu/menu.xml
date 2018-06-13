@@ -1,25 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-   >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/MojProfil"
+        android:title="Moj profil"
+        app:showAsAction="never"/>
 
 
-    <!--<item-->
-        <!--android:id="@+id/my_profile"-->
-        <!--android:icon="@android:drawable/ic_menu_close_clear_cancel"-->
-        <!--app:showAsAction="always"-->
-        <!--android:title="@string/moj_profil"/>-->
-    <!--<item-->
-        <!--android:id="@+id/contact"-->
-        <!--android:icon="@android:drawable/ic_menu_close_clear_cancel"-->
-        <!--app:showAsAction="always"-->
-        <!--android:title="@string/kontakt_poslodavca"/>-->
+
     <item
-        android:id="@+id/action_menu"
+        android:id="@+id/action_logout"
+        android:checkable="false"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        app:showAsAction="always"
-        android:title="@string/logout"/>
-
-
+        android:title="@string/logout" />
 
 </menu>

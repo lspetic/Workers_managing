@@ -10,7 +10,8 @@
         android:title="Lista Gradilista"
         app:showAsAction="never"></item>
 
-    <item android:id="@+id/Logout"
+    <item
+        android:id="@+id/logout"
         android:title="Logout"
         app:showAsAction="never"></item>
 

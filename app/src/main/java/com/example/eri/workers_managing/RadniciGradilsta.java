@@ -37,7 +37,6 @@ public class RadniciGradilsta extends AppCompatActivity {
     private MenuItem sp;
     private String prefid;
     private CompositeSubscription subscription;
-    private Intent intent_logout;
 
 
 
@@ -52,8 +51,9 @@ public class RadniciGradilsta extends AppCompatActivity {
         initSharedPreferences();
         subscription=new CompositeSubscription();
         load();
+        Log.d("++++",this.getClass().getName());
 
-        intent_logout=new Intent(this,MainActivity.class);
+
     }
 
     public void openRadnici(View view) {
@@ -77,23 +77,25 @@ public class RadniciGradilsta extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.menu, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
 
 
     public boolean onOptionsItemSelected(MenuItem item){
+
         switch (item.getItemId()) {
             case R.id.action_logout:
-              logout();
+        logout();
 
+            return true;
             case R.id.MojProfil:
 
                 Intent intent=new Intent(RadniciGradilsta.this,MyProfile.class);
                 startActivity(intent);
 
-
+            return  true;
             default:
              return super.onOptionsItemSelected(item);
         }
@@ -111,8 +113,7 @@ public class RadniciGradilsta extends AppCompatActivity {
             Log.d("+++",e.toString());
         }
 
-        intent_logout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent_logout);
+        finish();
     }
 
     //dohvacanje cijelog usera

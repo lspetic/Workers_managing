@@ -15,7 +15,8 @@
         android:checkable="false"
 
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/sort" />
+        android:title="@string/sort"
+        android:visible="true" />
 
     <item
         android:id="@+id/ch_view_av"
@@ -23,7 +24,8 @@
 
         android:checkable="true"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/dostupni" />
+        android:title="@string/dostupni"
+        android:visible="true" />
 
     <item
         android:id="@+id/action_logout"

@@ -84,7 +84,7 @@ protected void onCreate(Bundle savedInstanceState){
     getDefaults();  //postavljanje formi na početne vrijednosti korisnika ako takve postoje
 
     if (user.getGradiliste()!=null) {
-        loadGradiliste(); //dohvati objekt gradiliste ako je radnik več na nekom gradilistu
+        loadGradiliste();                        //dohvati objekt gradiliste ako je radnik več na nekom gradilistu
 
     }
     tvUser.setText(user.getName());             //prikaz podataka o korisniku
@@ -170,13 +170,13 @@ try {
             user.setEnd_job(etDateFinish.getText().toString());
             user.setGradiliste(etGradiliste.getText().toString());
 
+            if (!etGradiliste.getText().toString().equals("")){
 
-
-           if (gradiliste_old==null){               //radnik dodan na novo gradiliste
+           if (gradiliste!=null){                                    //radnik dodan na novo gradiliste
 
                gradiliste.setBr_radnika(gradiliste.getBr_radnika()+1);
                sendDataToSite(gradiliste);
-           }else  if(!gradiliste.getName().equals(gradiliste_old.getName())){   //radnik premjesten na drugo gradiliste
+           }else if(!user.getName().equals(gradiliste_old.getName()) && gradiliste!=null) {   //radnik premjesten na drugo gradiliste
 
                    gradiliste.setBr_radnika(gradiliste.getBr_radnika()+1);
                    gradiliste_old.setBr_radnika(gradiliste_old.getBr_radnika()+1);
@@ -194,7 +194,8 @@ try {
             }catch(Exception e){
                 Log.d("+++ee",e.toString());
             }
-        }
+
+        }}
     });
 
     bCancel.setOnClickListener(new View.OnClickListener(){
@@ -335,7 +336,6 @@ try {
 }catch (Exception e){
     Log.d("+++", e.toString());
 }
-
 
     }
 

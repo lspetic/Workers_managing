@@ -178,6 +178,9 @@ public class DisplayGradilistaActivity extends AppCompatActivity implements OnMa
                 Intent intent1=new Intent(DisplayGradilistaActivity.this,ListaGradilista.class);
                 startActivity(intent1);
                 return true;
+            case R.id.logout:
+                logout();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
